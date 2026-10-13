@@ -6,7 +6,7 @@ It never reopens the plan. There is no interview, no clarifying round, no propos
 
 ## When to reach for it
 
-You invoke this by typing `/implement` yourself, and the agent won't reach for it on its own. It ships with `disable-model-invocation: true`, so no other skill can call it either. Wherever [ask-matt](https://aihero.dev/skills-ask-matt) or [to-tickets](https://aihero.dev/skills-to-tickets) says "then `/implement` per ticket", that is an instruction to you, not something the agent will do unprompted.
+Type `/implement`, or the agent reaches for it automatically when implementing agreed work from a spec, issue, or tickets. In this fork, both Claude Code and Codex allow model invocation, so a coordinating agent can call the Skill tool with "implement". This changes who can start the build, not the work it performs: one invocation still implements one scoped piece of work, and [implement-spec](https://aihero.dev/skills-implement-spec) remains user-invoked.
 
 Where the work currently lives decides whether this is the right skill:
 
@@ -47,6 +47,10 @@ The skill's central idea is the **seam**, the public boundary you observe behavi
 The "pre-agreed" part matters, and it is also the skill's weakest point. Nothing inside `implement` agrees the seams. `tdd` is the skill that asks, and it refuses to write a test at an unconfirmed seam. So in practice the agreement happens either upstream in the spec, or in the first exchange of the run. If it happens nowhere, the run becomes "just write the code" and nothing warns you. Naming the seams in the spec is what stops that.
 
 ## Common questions
+
+**Can a coordinating agent start the implementation without me typing `/implement`?**
+
+Yes, when it has agreed work to implement and this fork's skill is installed. Explicit `/implement` invocation still works. Upstream installations and already-installed copies retain their own invocation policy until you update them from this fork; changing the repository does not update a running agent's skill list.
 
 **It finished, but my ticket is still open and the acceptance criteria are still unchecked.**
 
